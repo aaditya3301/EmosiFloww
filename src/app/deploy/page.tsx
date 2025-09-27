@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Vortex } from "@/components/ui/vortex";
 import Navbar from "@/components/ui/navbar";
 import { FileUpload } from "@/components/ui/file-upload";
+import { SpinnerLoader } from "@/components/ui/loaders";
 
 
 
@@ -13,6 +14,20 @@ export default function VortexDemoSecond() {
   const [isConnecting, setIsConnecting] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [ethAmount, setEthAmount] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <SpinnerLoader />;
+  }
 
   const handleFileUpload = (files: File[]) => {
     setUploadedFiles(prev => [...prev, ...files]);

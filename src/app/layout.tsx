@@ -9,7 +9,7 @@ const quantico = Quantico({
 });
 
 export const metadata: Metadata = {
-  title: "Tempris - Decentralized Time-Capsule Platform",
+  title: "EmosiFloww - Decentralized Time-Capsule Platform",
   description: "Create decentralized time-capsules using blockchain technology",
 };
 

@@ -1,8 +1,8 @@
-# Tempris - Decentralized Time-Capsule Platform
+# EmosiFloww - Decentralized Time-Capsule Platform
 
 ## Overview
 
-**Tempris** is a revolutionary Next.js-based frontend application that creates decentralized time-capsules using blockchain technology. Users can upload multimedia files with future notes that are encrypted and scheduled for automatic decryption at specified times, utilizing a sophisticated multi-chain infrastructure.
+**EmosiFloww** is a revolutionary Next.js-based frontend application that creates decentralized time-capsules using blockchain technology. Users can upload multimedia files with future notes that are encrypted and scheduled for automatic decryption at specified times, utilizing a sophisticated multi-chain infrastructure.
 
 ## 🚀 Features
 
@@ -69,7 +69,7 @@ The application follows a sophisticated 6-step process to ensure secure, decentr
 ## 📁 Project Structure
 
 ```
-tempris/
+EmosiFloww/
 ├── src/app/                 # Next.js app directory
 │   ├── page.tsx            # Main application page
 │   ├── layout.tsx          # App layout component
@@ -96,8 +96,8 @@ tempris/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/aaditya3301/Tempris.git
-cd Tempris
+git clone https://github.com/aaditya3301/EmosiFloww.git
+cd EmosiFloww
 ```
 
 2. Install dependencies:
@@ -161,8 +161,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For support, please:
 1. Check our [Documentation](docs/)
-2. Open an [Issue](https://github.com/aaditya3301/Tempris/issues)
-3. Join our [Discord Community](https://discord.gg/tempris)
+2. Open an [Issue](https://github.com/aaditya3301/EmosiFloww/issues)
+3. Join our [Discord Community](https://discord.gg/EmosiFloww)
 
 ## 🌟 Roadmap
 
@@ -177,6 +177,6 @@ For support, please:
 
 ---
 
-**Built with ❤️ by the Tempris Team**
+**Built with ❤️ by the EmosiFloww Team**
 
 *Preserving today for tomorrow, powered by blockchain technology.*

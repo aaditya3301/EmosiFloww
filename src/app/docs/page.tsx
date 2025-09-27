@@ -1,13 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/ui/navbar";
+import { PulseLoader } from "@/components/ui/loaders";
 
 export default function DocsPage() {
   const [isConnected, setIsConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
   const [isConnecting, setIsConnecting] = useState(false);
   const [activeSection, setActiveSection] = useState("introduction");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for documentation
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <PulseLoader />;
+  }
 
   const handleConnectWallet = async () => {
     if (isConnecting || isConnected) return;
@@ -87,12 +102,12 @@ export default function DocsPage() {
           <div className="space-y-6">
             <h1 className="text-4xl font-bold text-white mb-4">Introduction</h1>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Tempris is a decentralized time-capsule platform that allows you to store digital assets and messages on-chain, encrypted for the future. Built on blockchain technology, Tempris ensures your memories are preserved securely and immutably.
+              EmosiFloww is a decentralized time-capsule platform that allows you to store digital assets and messages on-chain, encrypted for the future. Built on blockchain technology, EmosiFloww ensures your memories are preserved securely and immutably.
             </p>
             
-            <h2 className="text-2xl font-semibold text-white mt-8 mb-4">What is Tempris?</h2>
+            <h2 className="text-2xl font-semibold text-white mt-8 mb-4">What is EmosiFloww?</h2>
             <p className="text-gray-300 leading-relaxed">
-              Tempris enables users to create digital time capsules that can contain files, messages, and even cryptocurrency. These capsules are locked with smart contracts and can only be opened at a predetermined time or when specific conditions are met.
+              EmosiFloww enables users to create digital time capsules that can contain files, messages, and even cryptocurrency. These capsules are locked with smart contracts and can only be opened at a predetermined time or when specific conditions are met.
             </p>
 
             <h2 className="text-2xl font-semibold text-white mt-8 mb-4">Key Features</h2>
@@ -122,7 +137,7 @@ export default function DocsPage() {
           <div className="space-y-6">
             <h1 className="text-4xl font-bold text-white mb-4">Quick Start</h1>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Get started with Tempris in just a few steps.
+              Get started with EmosiFloww in just a few steps.
             </p>
             
             <h2 className="text-2xl font-semibold text-white mt-8 mb-4">Step 1: Connect Your Wallet</h2>
@@ -162,7 +177,7 @@ export default function DocsPage() {
           <div className="space-y-6">
             <h1 className="text-4xl font-bold text-white mb-4">Time Capsules</h1>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Understanding how Tempris time capsules work and their lifecycle.
+              Understanding how EmosiFloww time capsules work and their lifecycle.
             </p>
             
             <h2 className="text-2xl font-semibold text-white mt-8 mb-4">Capsule Structure</h2>
@@ -213,7 +228,7 @@ export default function DocsPage() {
           <div className="space-y-6">
             <h1 className="text-4xl font-bold text-white mb-4">Smart Contracts</h1>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Learn about the smart contracts powering Tempris time capsules.
+              Learn about the smart contracts powering EmosiFloww time capsules.
             </p>
 
             <h2 className="text-2xl font-semibold text-white mt-8 mb-4">Contract Architecture</h2>

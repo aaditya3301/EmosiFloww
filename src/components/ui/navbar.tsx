@@ -23,7 +23,7 @@ export default function Navbar({
       {/* Brand Name */}
       <div className="text-white text-xl font-bold">
         <a href="/" >
-        &lt;Tempris&gt;
+        &lt;EmosiFloww&gt;
         </a>
       </div>
       
