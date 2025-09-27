@@ -1,0 +1,37 @@
+# EmosiFloww ASI Alliance Agents - Render Deployment Requirements
+# Multi-agent system with 4 specialized agents
+
+# Core uAgents framework with Bureau support
+uagents>=0.13.0
+uagents-core
+uagents[mailbox]
+
+# ASI API integration (optional - for enhanced responses)
+openai>=1.0.0
+
+# Environment and utilities
+python-dotenv
+requests>=2.31.0
+asyncio-mqtt>=0.16.1
+aiohttp>=3.9.1
+
+# Additional dependencies for EmosiFloww agents
+cryptography>=41.0.0
+pycryptodome>=3.19.0lliance     
+# Minimal dependencies for Background Worker deployment
+
+# Core uAgents framework
+uagents>=0.13.0
+uagents-core
+uagents[mailbox]
+
+# ASI API integration  
+openai>=1.0.0
+
+# Environment and utilities
+python-dotenv
+requests>=2.31.0
+
+# Optional: EmosiFloww integration
+asyncio-mqtt>=0.16.1
+aiohttp>=3.9.1
