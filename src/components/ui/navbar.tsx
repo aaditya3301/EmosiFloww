@@ -89,6 +89,9 @@ export default function Navbar({
         <a href="/comparison" className="text-white hover:text-gray-300 transition-colors">
           Compare NFTs
         </a>
+        <a href="/ai-interaction" className="text-white hover:text-yellow-300 transition-colors font-semibold">
+          🤖 AI Agents
+        </a>
         <a href="/decode" className="text-white hover:text-gray-300 transition-colors">
           Decode
         </a>
