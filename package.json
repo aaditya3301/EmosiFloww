@@ -9,6 +9,8 @@
         "lint": "eslint"
     },
     "dependencies": {
+        "@hashgraph/cryptography": "^1.11.0",
+        "@hashgraph/sdk": "^2.73.2",
         "@react-three/fiber": "^9.0.0-alpha.8",
         "@tabler/icons-react": "^3.35.0",
         "@types/js-cookie": "^3.0.6",

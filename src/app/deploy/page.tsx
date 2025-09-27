@@ -5,7 +5,7 @@ import { Vortex } from "@/components/ui/vortex";
 import Navbar from "@/components/ui/navbar";
 import { FileUpload } from "@/components/ui/file-upload";
 import { SpinnerLoader } from "@/components/ui/loaders";
-import { walrus, createTimeCapsule } from "@/store/functions";
+import { walrus, createTimeCapsule, createScheduledTimeCapsule } from "@/store/functions";
 
 interface UploadedFile {
   file: File;
@@ -15,8 +15,13 @@ interface UploadedFile {
   capsuleId?: string;
   nftTokenId?: number;
   nftTxHash?: string;
-  status: 'pending' | 'uploading' | 'uploaded' | 'minting' | 'completed' | 'error';
+  status: 'pending' | 'uploading' | 'uploaded' | 'minting' | 'scheduling' | 'completed' | 'error';
   error?: string;
+  // Hedera scheduled fields
+  hederaCapsuleId?: number;
+  scheduleId?: string;
+  unlockTime?: number;
+  isScheduled?: boolean;
 }
 
 export default function VortexDemoSecond() {
@@ -27,6 +32,14 @@ export default function VortexDemoSecond() {
   const [ethAmount, setEthAmount] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
+  
+  // New state for Hedera time-locking
+  const [capsuleType, setCapsuleType] = useState<'immediate' | 'scheduled'>('immediate');
+  const [unlockDateTime, setUnlockDateTime] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [createdBy, setCreatedBy] = useState('');
+  const [detailedNotes, setDetailedNotes] = useState('');
 
   useEffect(() => {
     // Simulate loading time
@@ -71,30 +84,90 @@ export default function VortexDemoSecond() {
       try {
         console.log(`Creating time capsule ${i + 1}/${filesToUpload.length}: ${fileObj.file.name}`);
         
-        // Create complete time capsule (Walrus + Encryption + NFT)
-        const result = await createTimeCapsule(fileObj.file, 5);
-        
-        // Update with success
-        setUploadedFiles(prev => 
-          prev.map(f => 
-            f.file === fileObj.file 
-              ? { 
-                  ...f, 
-                  status: 'completed' as const,
-                  blobId: result.blobId,
-                  fileUrl: result.fileUrl,
-                  encryptedBlobId: result.encryptedBlobId,
-                  capsuleId: result.capsuleId,
-                  nftTokenId: (result.nftResult as any).tokenId,
-                  nftTxHash: (result.nftResult as any).txHash
-                }
-              : f
-          )
-        );
-        
-        console.log(`✅ Time capsule created: ${fileObj.file.name}`);
-        console.log(`🎨 NFT Token ID: ${(result.nftResult as any).tokenId}`);
-        console.log(`💎 Transaction: ${(result.nftResult as any).txHash}`);
+        const metadata = {
+          title: title || fileObj.file.name,
+          description: description || 'Time capsule created with Tempris',
+          createdBy: createdBy || 'Anonymous',
+          detailedNotes: detailedNotes || '',
+          ethAmount: ethAmount || '0'
+        };
+
+        if (capsuleType === 'scheduled' && unlockDateTime) {
+          // Update status to scheduling
+          setUploadedFiles(prev => 
+            prev.map(f => 
+              f.file === fileObj.file 
+                ? { ...f, status: 'scheduling' as const }
+                : f
+            )
+          );
+
+          // Convert datetime-local to Unix timestamp
+          const unlockTime = Math.floor(new Date(unlockDateTime).getTime() / 1000);
+          
+          // Create scheduled time capsule with Hedera
+          const result = await createScheduledTimeCapsule(
+            fileObj.file, 
+            unlockTime, 
+            walletAddress, 
+            10, // 10 epochs for long-term storage
+            metadata
+          ) as any;
+          
+          // Update with success
+          setUploadedFiles(prev => 
+            prev.map(f => 
+              f.file === fileObj.file 
+                ? { 
+                    ...f, 
+                    status: 'completed' as const,
+                    blobId: result.blobId,
+                    fileUrl: result.fileUrl,
+                    encryptedBlobId: result.encryptedBlobId,
+                    capsuleId: result.capsuleId,
+                    nftTokenId: (result.nftResult as any).tokenId,
+                    nftTxHash: (result.nftResult as any).txHash,
+                    hederaCapsuleId: result.hederaCapsuleId,
+                    scheduleId: result.scheduleId,
+                    unlockTime: unlockTime,
+                    isScheduled: true
+                  }
+                : f
+            )
+          );
+          
+          console.log(`✅ Scheduled time capsule created: ${fileObj.file.name}`);
+          console.log(`⏰ Hedera Capsule ID: ${result.hederaCapsuleId}`);
+          console.log(`📅 Schedule ID: ${result.scheduleId}`);
+          console.log(`🔓 Unlocks at: ${new Date(unlockTime * 1000).toLocaleString()}`);
+          
+        } else {
+          // Create immediate time capsule (original functionality)
+          const result = await createTimeCapsule(fileObj.file, 5, metadata) as any;
+          
+          // Update with success
+          setUploadedFiles(prev => 
+            prev.map(f => 
+              f.file === fileObj.file 
+                ? { 
+                    ...f, 
+                    status: 'completed' as const,
+                    blobId: result.blobId,
+                    fileUrl: result.fileUrl,
+                    encryptedBlobId: result.encryptedBlobId,
+                    capsuleId: result.capsuleId,
+                    nftTokenId: (result.nftResult as any).tokenId,
+                    nftTxHash: (result.nftResult as any).txHash,
+                    isScheduled: false
+                  }
+                : f
+            )
+          );
+          
+          console.log(`✅ Time capsule created: ${fileObj.file.name}`);
+          console.log(`🎨 NFT Token ID: ${(result.nftResult as any).tokenId}`);
+          console.log(`💎 Transaction: ${(result.nftResult as any).txHash}`);
+        }
         
       } catch (error) {
         console.error(`❌ Failed to create time capsule for ${fileObj.file.name}:`, error);
@@ -222,6 +295,43 @@ export default function VortexDemoSecond() {
               </div>
 
               <div className="space-y-4">
+                {/* Capsule Type Selection */}
+                <div>
+                  <label className="block text-white text-sm font-medium mb-2">
+                    Capsule Type
+                  </label>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setCapsuleType('immediate')}
+                      className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                        capsuleType === 'immediate'
+                          ? 'bg-blue-500/20 border border-blue-500/50 text-blue-300'
+                          : 'bg-white/5 border border-white/20 text-gray-400 hover:bg-white/10'
+                      }`}
+                    >
+                      📥 Immediate Access
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCapsuleType('scheduled')}
+                      className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                        capsuleType === 'scheduled'
+                          ? 'bg-purple-500/20 border border-purple-500/50 text-purple-300'
+                          : 'bg-white/5 border border-white/20 text-gray-400 hover:bg-white/10'
+                      }`}
+                    >
+                      ⏰ Time-Locked
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {capsuleType === 'immediate' 
+                      ? 'Content is immediately accessible after creation'
+                      : 'Content is locked until specified unlock time using Hedera scheduling'
+                    }
+                  </p>
+                </div>
+
                 {/* Title */}
                 <div>
                   <label className="block text-white text-sm font-medium mb-2">
@@ -230,6 +340,8 @@ export default function VortexDemoSecond() {
                   <input
                     type="text"
                     placeholder="Enter capsule title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-white/40 focus:outline-none"
                   />
                 </div>
@@ -242,6 +354,8 @@ export default function VortexDemoSecond() {
                   <input
                     type="text"
                     placeholder="Brief description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-white/40 focus:outline-none"
                   />
                 </div>
@@ -250,12 +364,24 @@ export default function VortexDemoSecond() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-white text-sm font-medium mb-2">
-                      Time to Open
+                      {capsuleType === 'scheduled' ? 'Unlock Time' : 'Time to Open'}
                     </label>
                     <input
                       type="datetime-local"
-                      className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg text-white focus:border-white/40 focus:outline-none"
+                      value={unlockDateTime}
+                      onChange={(e) => setUnlockDateTime(e.target.value)}
+                      min={new Date().toISOString().slice(0, 16)} // Prevent past dates
+                      className={`w-full px-4 py-2.5 border rounded-lg text-white focus:outline-none ${
+                        capsuleType === 'scheduled'
+                          ? 'bg-purple-500/10 border-purple-500/30 focus:border-purple-400'
+                          : 'bg-white/5 border-white/20 focus:border-white/40'
+                      }`}
                     />
+                    {capsuleType === 'scheduled' && (
+                      <p className="text-xs text-purple-400 mt-1">
+                        ⚠️ Cannot be changed once created
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-white text-sm font-medium mb-2">
@@ -264,6 +390,8 @@ export default function VortexDemoSecond() {
                     <input
                       type="text"
                       placeholder="Your name or identifier"
+                      value={createdBy}
+                      onChange={(e) => setCreatedBy(e.target.value)}
                       className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-white/40 focus:outline-none"
                     />
                   </div>
@@ -277,6 +405,8 @@ export default function VortexDemoSecond() {
                   <textarea
                     rows={3}
                     placeholder="Write detailed notes for your future self..."
+                    value={detailedNotes}
+                    onChange={(e) => setDetailedNotes(e.target.value)}
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-white/40 focus:outline-none resize-none"
                   ></textarea>
                 </div>
@@ -308,9 +438,59 @@ export default function VortexDemoSecond() {
                 </div>
 
                 {/* Deploy Button */}
-                <button className="w-full mt-4 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-medium rounded-lg transition-all">
-                  Deploy Capsule
+                <button 
+                  onClick={() => {
+                    if (uploadedFiles.length === 0) {
+                      alert('Please upload at least one file');
+                      return;
+                    }
+                    if (capsuleType === 'scheduled' && !unlockDateTime) {
+                      alert('Please set an unlock time for scheduled time capsules');
+                      return;
+                    }
+                    if (capsuleType === 'scheduled' && new Date(unlockDateTime).getTime() <= Date.now()) {
+                      alert('Unlock time must be in the future');
+                      return;
+                    }
+                    if (!isConnected) {
+                      alert('Please connect your wallet first');
+                      return;
+                    }
+                    
+                    // Start upload process
+                    uploadFilesToWalrus(uploadedFiles.filter(f => f.status === 'pending'));
+                  }}
+                  disabled={isUploading || uploadedFiles.length === 0 || !isConnected}
+                  className={`w-full mt-4 px-6 py-3 font-medium rounded-lg transition-all ${
+                    isUploading || uploadedFiles.length === 0 || !isConnected
+                      ? 'bg-gray-600/20 border border-gray-600/30 text-gray-500 cursor-not-allowed'
+                      : capsuleType === 'scheduled'
+                      ? 'bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300'
+                      : 'bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-300'
+                  }`}
+                >
+                  {isUploading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <div className="w-4 h-4 border border-current border-t-transparent rounded-full animate-spin"></div>
+                      Creating {capsuleType === 'scheduled' ? 'Scheduled' : 'Immediate'} Capsules...
+                    </span>
+                  ) : (
+                    `Deploy ${capsuleType === 'scheduled' ? '⏰ Time-Locked' : '📥 Immediate'} Capsule${uploadedFiles.length > 1 ? 's' : ''}`
+                  )}
                 </button>
+                
+                {/* Validation Messages */}
+                {capsuleType === 'scheduled' && (
+                  <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3 mt-2 text-left">
+                    <h3 className="text-purple-400 font-medium mb-1">⏰ Scheduled Time Capsule:</h3>
+                    <ul className="text-gray-300 text-xs space-y-1">
+                      <li>• Uses Hedera network for true time-locking</li>
+                      <li>• Content cannot be accessed before unlock time</li>
+                      <li>• Requires additional Hedera transaction fees</li>
+                      <li>• Once created, unlock time cannot be changed</li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -367,18 +547,22 @@ export default function VortexDemoSecond() {
                       {uploadedFiles.map((fileObj, index) => (
                         <div key={index} className="p-2 bg-blue-500/10 border border-blue-500/30 rounded text-xs">
                           <div className="flex items-center justify-between mb-1">
-                            <div className="text-blue-400 font-medium truncate">
+                            <div className="text-blue-400 font-medium truncate flex items-center gap-1">
+                              {fileObj.isScheduled && <span>⏰</span>}
                               {fileObj.file.name}
                             </div>
                             <div className="flex items-center gap-1">
                               {fileObj.status === 'uploading' && (
                                 <div className="w-3 h-3 border border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
                               )}
+                              {fileObj.status === 'scheduling' && (
+                                <div className="w-3 h-3 border border-purple-400 border-t-transparent rounded-full animate-spin"></div>
+                              )}
                               {fileObj.status === 'minting' && (
                                 <div className="w-3 h-3 border border-purple-400 border-t-transparent rounded-full animate-spin"></div>
                               )}
                               {fileObj.status === 'completed' && (
-                                <div className="text-green-400">✨</div>
+                                <div className={fileObj.isScheduled ? "text-purple-400" : "text-green-400"}>✨</div>
                               )}
                               {fileObj.status === 'error' && (
                                 <div className="text-red-400">✗</div>
@@ -390,23 +574,34 @@ export default function VortexDemoSecond() {
                             <span className="ml-2 shrink-0">{(fileObj.file.size / 1024).toFixed(1)}KB</span>
                           </div>
                           {fileObj.status === 'completed' && (
-                            <div className="text-green-400 text-xs space-y-1">
+                            <div className={`text-xs space-y-1 ${fileObj.isScheduled ? 'text-purple-400' : 'text-green-400'}`}>
                               <div>🎯 Capsule ID: {fileObj.capsuleId}</div>
                               <div>🔗 Blob: {fileObj.blobId?.substring(0, 20)}...</div>
                               <div>🔐 Encrypted: {fileObj.encryptedBlobId?.substring(0, 20)}...</div>
-                              <div>🎨 NFT Token: #{fileObj.nftTokenId} <span className="text-yellow-400">(DEMO)</span></div>
+                              {fileObj.isScheduled && fileObj.hederaCapsuleId && (
+                                <>
+                                  <div>⏰ Hedera ID: {fileObj.hederaCapsuleId}</div>
+                                  <div>📅 Schedule: {fileObj.scheduleId?.substring(0, 20)}...</div>
+                                  <div>🔓 Unlocks: {fileObj.unlockTime ? new Date(fileObj.unlockTime * 1000).toLocaleDateString() : 'Unknown'}</div>
+                                </>
+                              )}
+                              <div>🎨 NFT Token: #{fileObj.nftTokenId} {fileObj.isScheduled ? <span className="text-purple-300">(SCHEDULED)</span> : <span className="text-yellow-400">(IMMEDIATE)</span>}</div>
                               <div className="flex gap-2">
-                                <a 
-                                  href={fileObj.fileUrl} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="text-blue-400 hover:text-blue-300 underline"
-                                >
-                                  View File
-                                </a>
-                                <span className="text-gray-500 text-xs">
-                                  NFT: Demo Mode
-                                </span>
+                                {!fileObj.isScheduled && (
+                                  <a 
+                                    href={fileObj.fileUrl} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-blue-400 hover:text-blue-300 underline"
+                                  >
+                                    View File
+                                  </a>
+                                )}
+                                {fileObj.isScheduled && (
+                                  <span className="text-purple-400 text-xs">
+                                    🔒 Locked until unlock time
+                                  </span>
+                                )}
                               </div>
                             </div>
                           )}

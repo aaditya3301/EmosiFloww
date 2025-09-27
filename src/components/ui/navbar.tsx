@@ -83,6 +83,15 @@ export default function Navbar({
         <a href="/capsules" className="text-white hover:text-gray-300 transition-colors">
           Your Capsules
         </a>
+        <a href="/status" className="text-white hover:text-gray-300 transition-colors">
+          Capsule Status
+        </a>
+        <a href="/comparison" className="text-white hover:text-gray-300 transition-colors">
+          Compare NFTs
+        </a>
+        <a href="/decode" className="text-white hover:text-gray-300 transition-colors">
+          Decode
+        </a>
 
         <a href="/docs" className="text-white hover:text-gray-300 transition-colors">
           Docs
