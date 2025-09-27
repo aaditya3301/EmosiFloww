@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/ui/navbar";
-import { PulseLoader } from "@/components/ui/loaders";
+import { LoaderFive } from "@/components/ui/loader";
 
 export default function DocsPage() {
   const [isConnected, setIsConnected] = useState(false);
@@ -21,7 +21,11 @@ export default function DocsPage() {
   }, []);
 
   if (isLoading) {
-    return <PulseLoader />;
+    return (
+      <div className="flex items-center justify-center w-full h-screen">
+        <LoaderFive text="Loading Documentation..." />
+      </div>
+    );
   }
 
   const handleConnectWallet = async () => {

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Vortex } from "@/components/ui/vortex";
 import Navbar from "@/components/ui/navbar";
-import { SpinnerLoader } from "@/components/ui/loaders";
+import { LoaderFive } from "@/components/ui/loader";
 import { checkTimeCapsuleStatus, unlockScheduledTimeCapsule } from "@/store/functions";
 
 interface TimeCapsuleStatus {
@@ -39,7 +39,11 @@ export default function TimeCapsuleStatus() {
   }, []);
 
   if (isLoading) {
-    return <SpinnerLoader />;
+    return (
+      <div className="flex items-center justify-center w-full h-screen">
+        <LoaderFive text="Loading Status..." />
+      </div>
+    );
   }
 
   const handleConnectWallet = async () => {

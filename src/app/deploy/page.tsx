@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Vortex } from "@/components/ui/vortex";
 import Navbar from "@/components/ui/navbar";
 import { FileUpload } from "@/components/ui/file-upload";
-import { SpinnerLoader } from "@/components/ui/loaders";
+import { LoaderFive } from "@/components/ui/loader";
 import { walrus, createTimeCapsule, createScheduledTimeCapsule } from "@/store/functions";
 
 interface UploadedFile {
@@ -51,7 +51,11 @@ export default function VortexDemoSecond() {
   }, []);
 
   if (isLoading) {
-    return <SpinnerLoader />;
+    return (
+      <div className="flex items-center justify-center w-full h-screen">
+        <LoaderFive text="Loading Deployment Environment..." />
+      </div>
+    );
   }
 
   const handleFileUpload = async (files: File[]) => {
@@ -310,7 +314,7 @@ export default function VortexDemoSecond() {
                           : 'bg-white/5 border border-white/20 text-gray-400 hover:bg-white/10'
                       }`}
                     >
-                      📥 Immediate Access
+                      Immediate Access
                     </button>
                     <button
                       type="button"
@@ -321,7 +325,7 @@ export default function VortexDemoSecond() {
                           : 'bg-white/5 border border-white/20 text-gray-400 hover:bg-white/10'
                       }`}
                     >
-                      ⏰ Time-Locked
+                      Time-Locked
                     </button>
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
@@ -475,7 +479,7 @@ export default function VortexDemoSecond() {
                       Creating {capsuleType === 'scheduled' ? 'Scheduled' : 'Immediate'} Capsules...
                     </span>
                   ) : (
-                    `Deploy ${capsuleType === 'scheduled' ? '⏰ Time-Locked' : '📥 Immediate'} Capsule${uploadedFiles.length > 1 ? 's' : ''}`
+                    `Deploy ${capsuleType === 'scheduled' ? 'Time-Locked' : 'Immediate'} Capsule${uploadedFiles.length > 1 ? 's' : ''}`
                   )}
                 </button>
                 
@@ -496,28 +500,6 @@ export default function VortexDemoSecond() {
 
             {/* Right Side - Logs & Assets */}
             <div className="w-72 bg-black/20 backdrop-blur-sm rounded-xl p-4 border border-white/10 flex flex-col max-h-[calc(100vh-120px)]">
-              {/* System Logs - Compact */}
-              <div className="mb-4">
-                <div className="mb-2">
-                  <h3 className="text-base font-medium text-white mb-1">
-                    System Logs
-                  </h3>
-                  <p className="text-gray-500 text-xs">
-                    Real-time status
-                  </p>
-                </div>
-
-                {/* Log Container - More Compact */}
-                <div className="h-24 bg-black/40 rounded-lg p-2 font-mono text-xs overflow-y-auto border border-white/10">
-                  <div className="space-y-0.5">
-                    <div className="text-green-400">[INFO] System ready</div>
-                    <div className="text-gray-500">[SYSTEM] Waiting for input...</div>
-                    <div className="text-blue-400">[NETWORK] Ethereum connected</div>
-                    <div className="text-yellow-400">[STATUS] Ready to deploy</div>
-                  </div>
-                </div>
-              </div>
-
               {/* Asset List - Takes Remaining Space */}
               <div className="flex-1 min-h-0">
                 <div className="mb-2">

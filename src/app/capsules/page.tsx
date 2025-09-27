@@ -5,7 +5,7 @@ import { Vortex } from "@/components/ui/vortex";
 import Navbar from "@/components/ui/navbar";
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import { AnimatePresence, motion } from "motion/react";
-import { DotsLoader } from "@/components/ui/loaders";
+import { LoaderFive } from "@/components/ui/loader";
 
 
 export default function CapsulesPage() {
@@ -24,7 +24,11 @@ export default function CapsulesPage() {
   }, []);
 
   if (isLoading) {
-    return <DotsLoader />;
+    return (
+      <div className="flex items-center justify-center w-full h-screen">
+        <LoaderFive text="Loading Capsules..." />
+      </div>
+    );
   }
 
   const handleConnectWallet = async () => {
