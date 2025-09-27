@@ -5,16 +5,28 @@ import { Vortex } from "@/components/ui/vortex";
 import Navbar from "@/components/ui/navbar";
 import { FileUpload } from "@/components/ui/file-upload";
 import { SpinnerLoader } from "@/components/ui/loaders";
+import { walrus, createTimeCapsule } from "@/store/functions";
 
-
+interface UploadedFile {
+  file: File;
+  blobId?: string;
+  fileUrl?: string;
+  encryptedBlobId?: string;
+  capsuleId?: string;
+  nftTokenId?: number;
+  nftTxHash?: string;
+  status: 'pending' | 'uploading' | 'uploaded' | 'minting' | 'completed' | 'error';
+  error?: string;
+}
 
 export default function VortexDemoSecond() {
   const [isConnected, setIsConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
   const [isConnecting, setIsConnecting] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [ethAmount, setEthAmount] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     // Simulate loading time
@@ -29,8 +41,80 @@ export default function VortexDemoSecond() {
     return <SpinnerLoader />;
   }
 
-  const handleFileUpload = (files: File[]) => {
-    setUploadedFiles(prev => [...prev, ...files]);
+  const handleFileUpload = async (files: File[]) => {
+    const newFiles: UploadedFile[] = files.map(file => ({
+      file,
+      status: 'pending' as const
+    }));
+    
+    setUploadedFiles(prev => [...prev, ...newFiles]);
+    
+    // Upload files to Walrus
+    await uploadFilesToWalrus(newFiles);
+  };
+
+  const uploadFilesToWalrus = async (filesToUpload: UploadedFile[]) => {
+    setIsUploading(true);
+    
+    for (let i = 0; i < filesToUpload.length; i++) {
+      const fileObj = filesToUpload[i];
+      
+      // Update status to uploading
+      setUploadedFiles(prev => 
+        prev.map(f => 
+          f.file === fileObj.file 
+            ? { ...f, status: 'uploading' as const }
+            : f
+        )
+      );
+      
+      try {
+        console.log(`Creating time capsule ${i + 1}/${filesToUpload.length}: ${fileObj.file.name}`);
+        
+        // Create complete time capsule (Walrus + Encryption + NFT)
+        const result = await createTimeCapsule(fileObj.file, 5);
+        
+        // Update with success
+        setUploadedFiles(prev => 
+          prev.map(f => 
+            f.file === fileObj.file 
+              ? { 
+                  ...f, 
+                  status: 'completed' as const,
+                  blobId: result.blobId,
+                  fileUrl: result.fileUrl,
+                  encryptedBlobId: result.encryptedBlobId,
+                  capsuleId: result.capsuleId,
+                  nftTokenId: (result.nftResult as any).tokenId,
+                  nftTxHash: (result.nftResult as any).txHash
+                }
+              : f
+          )
+        );
+        
+        console.log(`✅ Time capsule created: ${fileObj.file.name}`);
+        console.log(`🎨 NFT Token ID: ${(result.nftResult as any).tokenId}`);
+        console.log(`💎 Transaction: ${(result.nftResult as any).txHash}`);
+        
+      } catch (error) {
+        console.error(`❌ Failed to create time capsule for ${fileObj.file.name}:`, error);
+        
+        // Update with error
+        setUploadedFiles(prev => 
+          prev.map(f => 
+            f.file === fileObj.file 
+              ? { 
+                  ...f, 
+                  status: 'error' as const,
+                  error: error instanceof Error ? error.message : 'Time capsule creation failed'
+                }
+              : f
+          )
+        );
+      }
+    }
+    
+    setIsUploading(false);
   };
 
   const handleConnectWallet = async () => {
@@ -114,9 +198,27 @@ export default function VortexDemoSecond() {
                 <h2 className="text-2xl font-bold text-white mb-2">
                   Create Time Capsule
                 </h2>
-                <p className="text-gray-400 text-sm">
-                  Store your memories for the future
+                <p className="text-gray-400 text-sm mb-4">
+                  Upload files to decentralized storage and mint as encrypted NFTs
                 </p>
+                
+                {/* Requirements Notice */}
+                {!isConnected && (
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4 text-left">
+                    <h3 className="text-blue-400 font-medium mb-2">📋 Requirements:</h3>
+                    <ul className="text-gray-300 text-sm space-y-1">
+                      <li>• MetaMask wallet installed</li>
+                      <li>• Connected to Sepolia testnet</li>
+                      <li>• Some Sepolia ETH for gas fees</li>
+                    </ul>
+                    <div className="mt-2 text-xs text-gray-400">
+                      Get Sepolia ETH from: 
+                      <a href="https://sepoliafaucet.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 ml-1 underline">
+                        Sepolia Faucet
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-4">
@@ -262,17 +364,64 @@ export default function VortexDemoSecond() {
                   {/* Uploaded Files */}
                   {uploadedFiles.length > 0 ? (
                     <div className="space-y-2">
-                      {uploadedFiles.map((file, index) => (
+                      {uploadedFiles.map((fileObj, index) => (
                         <div key={index} className="p-2 bg-blue-500/10 border border-blue-500/30 rounded text-xs">
-                          <div className="text-blue-400 font-medium truncate mb-1">
-                            {file.name}
+                          <div className="flex items-center justify-between mb-1">
+                            <div className="text-blue-400 font-medium truncate">
+                              {fileObj.file.name}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {fileObj.status === 'uploading' && (
+                                <div className="w-3 h-3 border border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+                              )}
+                              {fileObj.status === 'minting' && (
+                                <div className="w-3 h-3 border border-purple-400 border-t-transparent rounded-full animate-spin"></div>
+                              )}
+                              {fileObj.status === 'completed' && (
+                                <div className="text-green-400">✨</div>
+                              )}
+                              {fileObj.status === 'error' && (
+                                <div className="text-red-400">✗</div>
+                              )}
+                            </div>
                           </div>
-                          <div className="flex justify-between text-gray-400">
-                            <span className="truncate">{file.type || 'unknown'}</span>
-                            <span className="ml-2 shrink-0">{(file.size / 1024).toFixed(1)}KB</span>
+                          <div className="flex justify-between text-gray-400 mb-1">
+                            <span className="truncate">{fileObj.file.type || 'unknown'}</span>
+                            <span className="ml-2 shrink-0">{(fileObj.file.size / 1024).toFixed(1)}KB</span>
                           </div>
+                          {fileObj.status === 'completed' && (
+                            <div className="text-green-400 text-xs space-y-1">
+                              <div>🎯 Capsule ID: {fileObj.capsuleId}</div>
+                              <div>🔗 Blob: {fileObj.blobId?.substring(0, 20)}...</div>
+                              <div>🔐 Encrypted: {fileObj.encryptedBlobId?.substring(0, 20)}...</div>
+                              <div>🎨 NFT Token: #{fileObj.nftTokenId} <span className="text-yellow-400">(DEMO)</span></div>
+                              <div className="flex gap-2">
+                                <a 
+                                  href={fileObj.fileUrl} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-blue-400 hover:text-blue-300 underline"
+                                >
+                                  View File
+                                </a>
+                                <span className="text-gray-500 text-xs">
+                                  NFT: Demo Mode
+                                </span>
+                              </div>
+                            </div>
+                          )}
+                          {fileObj.status === 'error' && fileObj.error && (
+                            <div className="text-red-400 text-xs">
+                              Error: {fileObj.error}
+                            </div>
+                          )}
                         </div>
                       ))}
+                      {isUploading && (
+                        <div className="text-yellow-400 text-xs text-center py-2">
+                          🚀 Creating time capsules (Walrus + NFT)...
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <div className="text-gray-500 text-xs text-center py-6">
