@@ -83,32 +83,6 @@ export default function Navbar({
         <NavLink href="/decode" label="Decode" /> */}
         <NavLink href="/docs" label="Docs" />
 
-<<<<<<< HEAD
-=======
-        <a href="/deploy" className="text-white hover:text-gray-300 transition-colors">
-          Deploy Capsules
-        </a>
-        <a href="/capsules" className="text-white hover:text-gray-300 transition-colors">
-          Your Capsules
-        </a>
-        <a href="/status" className="text-white hover:text-gray-300 transition-colors">
-          Capsule Status
-        </a>
-        <a href="/comparison" className="text-white hover:text-gray-300 transition-colors">
-          Compare NFTs
-        </a>
-        <a href="/ai-interaction" className="text-white hover:text-yellow-300 transition-colors font-semibold">
-          🤖 AI Agents
-        </a>
-        <a href="/decode" className="text-white hover:text-gray-300 transition-colors">
-          Decode
-        </a>
-
-        <a href="/docs" className="text-white hover:text-gray-300 transition-colors">
-          Docs
-        </a>
-        
->>>>>>> a7c5edb308c515075245771cb7e1ed831cd19332
         {/* GitHub Icon with count */}
         <div className="flex items-center gap-2 text-white">
             <a
