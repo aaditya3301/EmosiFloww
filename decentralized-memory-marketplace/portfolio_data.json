@@ -1,0 +1,1002 @@
+{
+  "0x1234567890abcdef": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:07:01.199847+00:00"
+  },
+  "0x9876543210fedcba": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:07:01.204675+00:00"
+  },
+  "0xtest_user_address": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:07:01.211685+00:00"
+  },
+  "0xuser_with_portfolio": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:07:03.237670+00:00"
+  },
+  "0xnew_user": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:07:03.244044+00:00"
+  },
+  "0xhigh_value_collector": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:07:03.250057+00:00"
+  },
+  "0xintegrated_test_user": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:07:03.257245+00:00"
+  },
+  "0xreal_user_test": {
+    "nfts": [
+      {
+        "token_id": "memory_001",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmX1234...",
+        "mint_date": "2024-09-01T10:00:00Z",
+        "current_value": 520.0,
+        "purchase_price": 450.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.95,
+        "rarity_score": 8.2,
+        "metadata": {
+          "title": "First Day of School",
+          "year": 1995
+        }
+      },
+      {
+        "token_id": "memory_002",
+        "memory_type": "first_love",
+        "content_hash": "QmY5678...",
+        "mint_date": "2024-09-05T14:30:00Z",
+        "current_value": 385.0,
+        "purchase_price": 320.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.88,
+        "rarity_score": 7.5,
+        "metadata": {
+          "title": "First Kiss at Prom",
+          "year": 2010
+        }
+      },
+      {
+        "token_id": "memory_003",
+        "memory_type": "achievement",
+        "content_hash": "QmZ9012...",
+        "mint_date": "2024-09-10T09:15:00Z",
+        "current_value": 295.0,
+        "purchase_price": 300.0,
+        "listing_status": "listed",
+        "authenticity_score": 0.92,
+        "rarity_score": 6.8,
+        "metadata": {
+          "title": "Graduation Day",
+          "year": 2018
+        }
+      },
+      {
+        "token_id": "memory_004",
+        "memory_type": "travel_experience",
+        "content_hash": "QmA3456...",
+        "mint_date": "2024-09-12T16:45:00Z",
+        "current_value": 180.0,
+        "purchase_price": 150.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.85,
+        "rarity_score": 5.9,
+        "metadata": {
+          "title": "Paris Sunset",
+          "year": 2022
+        }
+      },
+      {
+        "token_id": "memory_005",
+        "memory_type": "family_moment",
+        "content_hash": "QmB7890...",
+        "mint_date": "2024-09-15T12:00:00Z",
+        "current_value": 410.0,
+        "purchase_price": 380.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.98,
+        "rarity_score": 8.5,
+        "metadata": {
+          "title": "Grandma's Last Birthday",
+          "year": 2020
+        }
+      },
+      {
+        "token_id": "memory_006",
+        "memory_type": "achievement",
+        "content_hash": "QmC1122...",
+        "mint_date": "2024-09-18T08:30:00Z",
+        "current_value": 225.0,
+        "purchase_price": 280.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.9,
+        "rarity_score": 6.2,
+        "metadata": {
+          "title": "First Job Offer",
+          "year": 2019
+        }
+      },
+      {
+        "token_id": "memory_007",
+        "memory_type": "travel_experience",
+        "content_hash": "QmD3344...",
+        "mint_date": "2024-09-20T19:20:00Z",
+        "current_value": 165.0,
+        "purchase_price": 140.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.87,
+        "rarity_score": 5.5,
+        "metadata": {
+          "title": "Tokyo Cherry Blossoms",
+          "year": 2023
+        }
+      },
+      {
+        "token_id": "memory_008",
+        "memory_type": "childhood_experience",
+        "content_hash": "QmE5566...",
+        "mint_date": "2024-09-22T11:10:00Z",
+        "current_value": 340.0,
+        "purchase_price": 290.0,
+        "listing_status": "unlisted",
+        "authenticity_score": 0.94,
+        "rarity_score": 7.8,
+        "metadata": {
+          "title": "Summer Camp Adventure",
+          "year": 1998
+        }
+      }
+    ],
+    "last_updated": "2025-09-27T15:21:47.425505+00:00"
+  }
+}

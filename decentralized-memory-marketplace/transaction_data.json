@@ -1,0 +1,576 @@
+{
+  "transactions": [
+    {
+      "transaction_id": "tx_ae8f6e83",
+      "transaction_type": "nft_purchase",
+      "initiator_address": "0xbuyer123",
+      "participants": [
+        "0xbuyer123",
+        "0xseller456",
+        "memory_appraiser",
+        "authenticity_validator",
+        "trading_legacy_agent",
+        "marketplace_coordinator"
+      ],
+      "steps": [
+        {
+          "step_id": "tx_ae8f6e83_step_1",
+          "agent_address": "memory_appraiser",
+          "action": "verify_valuation",
+          "parameters": {
+            "nft_token_id": "memory_test_001",
+            "offered_price": 250.0,
+            "market_validation": true
+          },
+          "status": "completed",
+          "result": {
+            "valuation_confirmed": true,
+            "market_price": 237.5,
+            "confidence": 0.88
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:09:41.064858+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_ae8f6e83_step_2",
+          "agent_address": "authenticity_validator",
+          "action": "verify_authenticity",
+          "parameters": {
+            "nft_token_id": "memory_test_001",
+            "seller_address": "0xseller456",
+            "comprehensive_check": true
+          },
+          "status": "completed",
+          "result": {
+            "authenticity_confirmed": true,
+            "authenticity_score": 0.92,
+            "fraud_risk": "low"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:09:41.065252+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_ae8f6e83_step_3",
+          "agent_address": "trading_legacy_agent",
+          "action": "setup_escrow",
+          "parameters": {
+            "buyer_address": "0xbuyer123",
+            "seller_address": "0xseller456",
+            "amount": 250.0,
+            "nft_token_id": "memory_test_001"
+          },
+          "status": "completed",
+          "result": {
+            "escrow_address": "0xescrow_e8052af1",
+            "amount_locked": 250.0,
+            "status": "locked"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:09:42.689610+00:00",
+          "dependencies": [
+            "tx_ae8f6e83_step_1",
+            "tx_ae8f6e83_step_2"
+          ]
+        },
+        {
+          "step_id": "tx_ae8f6e83_step_4",
+          "agent_address": "trading_legacy_agent",
+          "action": "execute_transfer",
+          "parameters": {
+            "from_address": "0xseller456",
+            "to_address": "0xbuyer123",
+            "nft_token_id": "memory_test_001",
+            "payment_amount": 250.0
+          },
+          "status": "pending",
+          "result": null,
+          "error_message": null,
+          "timestamp": null,
+          "dependencies": [
+            "tx_ae8f6e83_step_3"
+          ]
+        },
+        {
+          "step_id": "tx_ae8f6e83_step_5",
+          "agent_address": "marketplace_coordinator",
+          "action": "finalize_transaction",
+          "parameters": {
+            "transaction_id": "tx_ae8f6e83",
+            "update_market_data": true,
+            "notify_participants": true
+          },
+          "status": "pending",
+          "result": null,
+          "error_message": null,
+          "timestamp": null,
+          "dependencies": [
+            "tx_ae8f6e83_step_4"
+          ]
+        }
+      ],
+      "status": "executing",
+      "total_value": 250.0,
+      "fees": {
+        "marketplace_fee": 6.25,
+        "gas_fee": 15.0,
+        "validation_fee": 5.0
+      },
+      "metadata": {},
+      "created_at": "2025-09-27T15:09:39.746405+00:00",
+      "updated_at": "2025-09-27T15:09:42.689862+00:00",
+      "completed_at": null
+    },
+    {
+      "transaction_id": "tx_ac8f68c2",
+      "transaction_type": "nft_listing",
+      "initiator_address": "0xintegrated_test_user",
+      "participants": [
+        "0xintegrated_test_user",
+        "authenticity_validator",
+        "memory_appraiser",
+        "marketplace_coordinator"
+      ],
+      "steps": [
+        {
+          "step_id": "tx_ac8f68c2_step_1",
+          "agent_address": "authenticity_validator",
+          "action": "verify_ownership",
+          "parameters": {
+            "nft_token_id": "memory_002",
+            "claimed_owner": "0xintegrated_test_user"
+          },
+          "status": "pending",
+          "result": null,
+          "error_message": null,
+          "timestamp": null,
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_ac8f68c2_step_2",
+          "agent_address": "memory_appraiser",
+          "action": "market_valuation",
+          "parameters": {
+            "nft_token_id": "memory_002",
+            "asking_price": 423.50000000000006,
+            "provide_pricing_recommendation": true
+          },
+          "status": "pending",
+          "result": null,
+          "error_message": null,
+          "timestamp": null,
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_ac8f68c2_step_3",
+          "agent_address": "marketplace_coordinator",
+          "action": "create_listing",
+          "parameters": {
+            "seller_address": "0xintegrated_test_user",
+            "nft_token_id": "memory_002",
+            "asking_price": 423.50000000000006,
+            "metadata": null
+          },
+          "status": "pending",
+          "result": null,
+          "error_message": null,
+          "timestamp": null,
+          "dependencies": [
+            "tx_ac8f68c2_step_1",
+            "tx_ac8f68c2_step_2"
+          ]
+        }
+      ],
+      "status": "executing",
+      "total_value": 423.50000000000006,
+      "fees": {
+        "listing_fee": 5.0,
+        "validation_fee": 3.0
+      },
+      "metadata": {},
+      "created_at": "2025-09-27T15:09:41.777414+00:00",
+      "updated_at": "2025-09-27T15:09:41.782936+00:00",
+      "completed_at": null
+    },
+    {
+      "transaction_id": "tx_8167ae78",
+      "transaction_type": "nft_listing",
+      "initiator_address": "0xseller789",
+      "participants": [
+        "0xseller789",
+        "authenticity_validator",
+        "memory_appraiser",
+        "marketplace_coordinator"
+      ],
+      "steps": [
+        {
+          "step_id": "tx_8167ae78_step_1",
+          "agent_address": "authenticity_validator",
+          "action": "verify_ownership",
+          "parameters": {
+            "nft_token_id": "memory_test_002",
+            "claimed_owner": "0xseller789"
+          },
+          "status": "completed",
+          "result": {
+            "ownership_confirmed": true,
+            "owner_address": "0xseller789",
+            "verification_method": "blockchain_query"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:09:40.862897+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_8167ae78_step_2",
+          "agent_address": "memory_appraiser",
+          "action": "market_valuation",
+          "parameters": {
+            "nft_token_id": "memory_test_002",
+            "asking_price": 180.0,
+            "provide_pricing_recommendation": true
+          },
+          "status": "completed",
+          "result": {
+            "estimated_value": 165.6,
+            "market_demand": "moderate",
+            "pricing_recommendation": "competitive"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:09:40.863277+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_8167ae78_step_3",
+          "agent_address": "marketplace_coordinator",
+          "action": "create_listing",
+          "parameters": {
+            "seller_address": "0xseller789",
+            "nft_token_id": "memory_test_002",
+            "asking_price": 180.0,
+            "metadata": null
+          },
+          "status": "completed",
+          "result": {
+            "listing_id": "listing_16896afa",
+            "listing_created": true,
+            "visible_on_marketplace": true
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:09:42.094126+00:00",
+          "dependencies": [
+            "tx_8167ae78_step_1",
+            "tx_8167ae78_step_2"
+          ]
+        }
+      ],
+      "status": "completed",
+      "total_value": 180.0,
+      "fees": {
+        "listing_fee": 5.0,
+        "validation_fee": 3.0
+      },
+      "metadata": {},
+      "created_at": "2025-09-27T15:09:39.750134+00:00",
+      "updated_at": "2025-09-27T15:09:42.094495+00:00",
+      "completed_at": "2025-09-27T15:09:42.611397+00:00"
+    },
+    {
+      "transaction_id": "tx_bba77070",
+      "transaction_type": "nft_listing",
+      "initiator_address": "0xseller789",
+      "participants": [
+        "0xseller789",
+        "authenticity_validator",
+        "memory_appraiser",
+        "marketplace_coordinator"
+      ],
+      "steps": [
+        {
+          "step_id": "tx_bba77070_step_1",
+          "agent_address": "authenticity_validator",
+          "action": "verify_ownership",
+          "parameters": {
+            "nft_token_id": "memory_test_002",
+            "claimed_owner": "0xseller789"
+          },
+          "status": "completed",
+          "result": {
+            "ownership_confirmed": true,
+            "owner_address": "0xseller789",
+            "verification_method": "blockchain_query"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:55.245896+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_bba77070_step_2",
+          "agent_address": "memory_appraiser",
+          "action": "market_valuation",
+          "parameters": {
+            "nft_token_id": "memory_test_002",
+            "asking_price": 180.0,
+            "provide_pricing_recommendation": true
+          },
+          "status": "completed",
+          "result": {
+            "estimated_value": 165.6,
+            "market_demand": "moderate",
+            "pricing_recommendation": "competitive"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:55.246196+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_bba77070_step_3",
+          "agent_address": "marketplace_coordinator",
+          "action": "create_listing",
+          "parameters": {
+            "seller_address": "0xseller789",
+            "nft_token_id": "memory_test_002",
+            "asking_price": 180.0,
+            "metadata": null
+          },
+          "status": "completed",
+          "result": {
+            "listing_id": "listing_6a2d2c2a",
+            "listing_created": true,
+            "visible_on_marketplace": true
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:56.377893+00:00",
+          "dependencies": [
+            "tx_bba77070_step_1",
+            "tx_bba77070_step_2"
+          ]
+        }
+      ],
+      "status": "completed",
+      "total_value": 180.0,
+      "fees": {
+        "listing_fee": 5.0,
+        "validation_fee": 3.0
+      },
+      "metadata": {},
+      "created_at": "2025-09-27T15:33:54.220676+00:00",
+      "updated_at": "2025-09-27T15:33:56.378287+00:00",
+      "completed_at": "2025-09-27T15:33:56.886795+00:00"
+    },
+    {
+      "transaction_id": "tx_741749be",
+      "transaction_type": "nft_purchase",
+      "initiator_address": "0xbuyer123",
+      "participants": [
+        "0xbuyer123",
+        "0xseller456",
+        "memory_appraiser",
+        "authenticity_validator",
+        "trading_legacy_agent",
+        "marketplace_coordinator"
+      ],
+      "steps": [
+        {
+          "step_id": "tx_741749be_step_1",
+          "agent_address": "memory_appraiser",
+          "action": "verify_valuation",
+          "parameters": {
+            "nft_token_id": "memory_test_001",
+            "offered_price": 250.0,
+            "market_validation": true
+          },
+          "status": "completed",
+          "result": {
+            "valuation_confirmed": true,
+            "market_price": 237.5,
+            "confidence": 0.88
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:55.446395+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_741749be_step_2",
+          "agent_address": "authenticity_validator",
+          "action": "verify_authenticity",
+          "parameters": {
+            "nft_token_id": "memory_test_001",
+            "seller_address": "0xseller456",
+            "comprehensive_check": true
+          },
+          "status": "completed",
+          "result": {
+            "authenticity_confirmed": true,
+            "authenticity_score": 0.92,
+            "fraud_risk": "low"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:55.446803+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_741749be_step_3",
+          "agent_address": "trading_legacy_agent",
+          "action": "setup_escrow",
+          "parameters": {
+            "buyer_address": "0xbuyer123",
+            "seller_address": "0xseller456",
+            "amount": 250.0,
+            "nft_token_id": "memory_test_001"
+          },
+          "status": "completed",
+          "result": {
+            "escrow_address": "0xescrow_57da7ff0",
+            "amount_locked": 250.0,
+            "status": "locked"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:57.269982+00:00",
+          "dependencies": [
+            "tx_741749be_step_1",
+            "tx_741749be_step_2"
+          ]
+        },
+        {
+          "step_id": "tx_741749be_step_4",
+          "agent_address": "trading_legacy_agent",
+          "action": "execute_transfer",
+          "parameters": {
+            "from_address": "0xseller456",
+            "to_address": "0xbuyer123",
+            "nft_token_id": "memory_test_001",
+            "payment_amount": 250.0
+          },
+          "status": "completed",
+          "result": {
+            "transaction_hash": "0x3683b9ea0258409c813ac67528def411",
+            "nft_transferred": true,
+            "payment_transferred": true
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:58.588722+00:00",
+          "dependencies": [
+            "tx_741749be_step_3"
+          ]
+        },
+        {
+          "step_id": "tx_741749be_step_5",
+          "agent_address": "marketplace_coordinator",
+          "action": "finalize_transaction",
+          "parameters": {
+            "transaction_id": "tx_741749be",
+            "update_market_data": true,
+            "notify_participants": true
+          },
+          "status": "completed",
+          "result": {
+            "market_data_updated": true,
+            "participants_notified": true,
+            "transaction_recorded": true
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:33:59.906808+00:00",
+          "dependencies": [
+            "tx_741749be_step_4"
+          ]
+        }
+      ],
+      "status": "completed",
+      "total_value": 250.0,
+      "fees": {
+        "marketplace_fee": 6.25,
+        "gas_fee": 15.0,
+        "validation_fee": 5.0
+      },
+      "metadata": {},
+      "created_at": "2025-09-27T15:33:54.212793+00:00",
+      "updated_at": "2025-09-27T15:33:59.907183+00:00",
+      "completed_at": "2025-09-27T15:34:00.425544+00:00"
+    },
+    {
+      "transaction_id": "tx_702b4cd0",
+      "transaction_type": "nft_listing",
+      "initiator_address": "0xintegrated_test_user",
+      "participants": [
+        "0xintegrated_test_user",
+        "authenticity_validator",
+        "memory_appraiser",
+        "marketplace_coordinator"
+      ],
+      "steps": [
+        {
+          "step_id": "tx_702b4cd0_step_1",
+          "agent_address": "authenticity_validator",
+          "action": "verify_ownership",
+          "parameters": {
+            "nft_token_id": "memory_002",
+            "claimed_owner": "0xintegrated_test_user"
+          },
+          "status": "completed",
+          "result": {
+            "ownership_confirmed": true,
+            "owner_address": "0xintegrated_test_user",
+            "verification_method": "blockchain_query"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:34:25.428793+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_702b4cd0_step_2",
+          "agent_address": "memory_appraiser",
+          "action": "market_valuation",
+          "parameters": {
+            "nft_token_id": "memory_002",
+            "asking_price": 423.50000000000006,
+            "provide_pricing_recommendation": true
+          },
+          "status": "completed",
+          "result": {
+            "estimated_value": 389.62000000000006,
+            "market_demand": "moderate",
+            "pricing_recommendation": "competitive"
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:34:25.429118+00:00",
+          "dependencies": []
+        },
+        {
+          "step_id": "tx_702b4cd0_step_3",
+          "agent_address": "marketplace_coordinator",
+          "action": "create_listing",
+          "parameters": {
+            "seller_address": "0xintegrated_test_user",
+            "nft_token_id": "memory_002",
+            "asking_price": 423.50000000000006,
+            "metadata": null
+          },
+          "status": "completed",
+          "result": {
+            "listing_id": "listing_c5246305",
+            "listing_created": true,
+            "visible_on_marketplace": true
+          },
+          "error_message": null,
+          "timestamp": "2025-09-27T15:34:27.053688+00:00",
+          "dependencies": [
+            "tx_702b4cd0_step_1",
+            "tx_702b4cd0_step_2"
+          ]
+        }
+      ],
+      "status": "completed",
+      "total_value": 423.50000000000006,
+      "fees": {
+        "listing_fee": 5.0,
+        "validation_fee": 3.0
+      },
+      "metadata": {},
+      "created_at": "2025-09-27T15:34:24.518711+00:00",
+      "updated_at": "2025-09-27T15:34:27.054082+00:00",
+      "completed_at": "2025-09-27T15:34:27.572566+00:00"
+    }
+  ]
+}
