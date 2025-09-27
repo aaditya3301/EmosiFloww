@@ -65,6 +65,20 @@ export default function CapsulesPage() {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
+  // Handle wallet restoration from JWT
+  const handleWalletRestore = (address: string) => {
+    setIsConnected(true);
+    setWalletAddress(address);
+    console.log('Wallet restored from JWT:', address);
+  };
+
+  // Handle wallet disconnection
+  const handleWalletDisconnect = () => {
+    setIsConnected(false);
+    setWalletAddress("");
+    console.log('Wallet disconnected');
+  };
+
   return (
     <div className="w-full h-screen overflow-hidden">
       <Navbar
@@ -73,6 +87,8 @@ export default function CapsulesPage() {
         isConnecting={isConnecting}
         handleConnectWallet={handleConnectWallet}
         formatAddress={formatAddress}
+        onWalletRestore={handleWalletRestore}
+        onWalletDisconnect={handleWalletDisconnect}
       />
       
       {/* Vortex Background */}

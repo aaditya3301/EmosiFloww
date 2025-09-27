@@ -1,7 +1,8 @@
      
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createSimpleJWT, decodeJWT } from "@/lib/jwt";
 
 interface NavbarProps {
   isConnected: boolean;
@@ -9,6 +10,8 @@ interface NavbarProps {
   isConnecting: boolean;
   handleConnectWallet: () => void;
   formatAddress: (address: string) => string;
+  onWalletRestore?: (address: string) => void; // New callback for restoring wallet state
+  onWalletDisconnect?: () => void; // New callback for disconnecting
 }
 
 export default function Navbar({
@@ -17,7 +20,50 @@ export default function Navbar({
   isConnecting,
   handleConnectWallet,
   formatAddress,
+  onWalletRestore,
+  onWalletDisconnect,
 }: NavbarProps) {
+  
+  // Enhanced wallet connection with JWT
+  const handleConnectWithJWT = async () => {
+    await handleConnectWallet();
+  };
+
+  // Create JWT when wallet gets connected (watch walletAddress changes)
+  useEffect(() => {
+    if (isConnected && walletAddress) {
+      const jwt = createSimpleJWT(walletAddress);
+      localStorage.setItem('wallet-jwt', jwt);
+      console.log('JWT created and stored:', jwt);
+    }
+  }, [isConnected, walletAddress]);
+
+  // Check for existing JWT on load and restore wallet state
+  useEffect(() => {
+    const jwt = localStorage.getItem('wallet-jwt');
+    if (jwt) {
+      const decoded = decodeJWT(jwt);
+      if (decoded && decoded.walletAddress) {
+        console.log('Found valid JWT for wallet:', decoded.walletAddress);
+        // Restore wallet connection in parent component
+        if (onWalletRestore) {
+          onWalletRestore(decoded.walletAddress);
+        }
+      } else {
+        localStorage.removeItem('wallet-jwt');
+        console.log('JWT expired or invalid, removed');
+      }
+    }
+  }, [onWalletRestore]);
+
+  const handleDisconnect = () => {
+    localStorage.removeItem('wallet-jwt');
+    console.log('JWT removed from localStorage');
+    // Notify parent component to disconnect
+    if (onWalletDisconnect) {
+      onWalletDisconnect();
+    }
+  };
   return (
     <nav className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-4 bg-transparent">
       {/* Brand Name */}
@@ -52,13 +98,22 @@ export default function Navbar({
 
         {/* Wallet Connection */}
         {isConnected ? (
-          <div className="flex items-center gap-2 text-white bg-green-600/20 px-3 py-1 rounded-lg border border-green-500/30">
-            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-            <span className="text-sm font-mono">{formatAddress(walletAddress)}</span>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-white bg-green-600/20 px-3 py-1 rounded-lg border border-green-500/30">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span className="text-sm font-mono">{formatAddress(walletAddress)}</span>
+            </div>
+            <button
+              onClick={handleDisconnect}
+              className="text-white bg-red-600/20 hover:bg-red-600/30 px-2 py-1 rounded-lg border border-red-500/30 transition-all text-sm"
+              title="Disconnect & Clear JWT"
+            >
+              ✕
+            </button>
           </div>
         ) : (
           <button
-            onClick={handleConnectWallet}
+            onClick={handleConnectWithJWT}
             disabled={isConnecting}
             className="text-white bg-blue-600/20 hover:bg-blue-600/30 px-3 py-1 rounded-lg border border-blue-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >

@@ -11,8 +11,11 @@
     "dependencies": {
         "@react-three/fiber": "^9.0.0-alpha.8",
         "@tabler/icons-react": "^3.35.0",
+        "@types/js-cookie": "^3.0.6",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "jose": "^6.1.0",
+        "js-cookie": "^3.0.5",
         "lucide-react": "^0.544.0",
         "motion": "^12.23.22",
         "next": "15.5.4",
