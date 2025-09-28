@@ -35,3 +35,22 @@ requests>=2.31.0
 # Optional: EmosiFloww integration
 asyncio-mqtt>=0.16.1
 aiohttp>=3.9.1
+
+
+
+uagents>=0.13.0
+uagents-core
+uagents[mailbox]
+
+openai>=1.0.0
+
+python-dotenv
+requests>=2.31.0
+asyncio-mqtt>=0.16.1
+aiohttp>=3.9.1
+
+cryptography>=41.0.0
+pycryptodome>=3.19.0lliance     
+
+asyncio-mqtt>=0.16.1
+aiohttp>=3.9.1

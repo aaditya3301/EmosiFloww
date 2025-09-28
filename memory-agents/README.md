@@ -4,20 +4,13 @@
 ![tag:emosifloww](https://img.shields.io/badge/emosifloww-3D8BD3)
 ![tag:innovationlab](https://img.shields.io/badge/innovationlab-3D8BD3)
 
-🏆 **ASI Alliance Hackathon Submission** - Human-AI Interaction Excellence & Multi-Agent System
 
 ## Overview
 
-This is an ASI Alliance compatible agent specialized for **EmosiFloww time capsule analysis and trading**. The agent integrates 4 specialized functions (Market Analysis, Memory Appraisal, Authenticity Validation, Legacy Assessment) into a single deployable agent compatible with Agentverse via Render.
+This is an ASI Alliance compatible agent specialized for **EmosiFloww time capsule analysis and trading**. The agent integrates 4 specialized functions (Market Analysis, Memory Appraisal, Authenticity Validation, Legacy Assessment) into a single deployable agent compatible with Agentverse.
 
-### 🎯 Target Hackathon Prizes
 
-- **ASI:One Integration Prize** ($3,500) - Agent discoverable via ASI:One protocol
-- **Agentverse Launch Prize** ($2,500) - Deployed to Agentverse via Render Background Worker
-- **Human-Agent Interaction Excellence** - Specialized for human memory asset decisions
-- **Multi-Agent System** - Coordinates 4 specialized AI functions
-
-## 🤖 The 4 Specialized AI Agents
+## The 4 Specialized AI Agents
 
 ### 1. **Marketplace Coordinator** 
 - **File**: `agents/marketplace_coordinator.py`
@@ -47,13 +40,12 @@ This is an ASI Alliance compatible agent specialized for **EmosiFloww time capsu
 - **Specialization**: Legacy Value & Historical Context Assessment
 - **Function**: Evaluates long-term value, historical significance, and generational appeal
 
-## 🚀 Key Features
+##  Key Features
 
 ### ASI Alliance Compatibility
 - ✅ **Chat Protocol** - All agents use standardized chat protocol
 - ✅ **mailbox=True** - Discoverable via ASI:One network
 - ✅ **ASI:One Integration** - Registered on ASI:One discovery service
-- ✅ **Agentverse Deployment** - Hosted on Agentverse platform
 
 ### EmosiFloww Integration
 - **Time Capsule Analysis** - Analyzes user's NFT time capsules
@@ -174,14 +166,6 @@ AGENT_PORT=8001
 - **Trading Guidance** - AI-powered recommendations for optimal trading decisions
 - **Real-time Analysis** - Live updates on market conditions and opportunities
 
-### For Hackathon Judges
-- **ASI:One Integration** - All agents discoverable and verifiable on ASI:One
-- **Multi-Agent Collaboration** - Demonstrtes coordinated AI agent behavior
-- **Human-Centered Design** - Intuitive interface showcasing human-AI interaction
-- **EmosiFloww Integration** - Real integration with existing time capsule platform
-
-## 🏆 Hackathon Value Proposition
-
 ### Innovation
 - **First time capsule trading platform** with AI agent integration
 - **Novel use of ASI Alliance** for emotional memory asset analysis
@@ -199,11 +183,8 @@ AGENT_PORT=8001
 
 ## 🔗 Links
 
-- **Live Demo**: [Coming Soon - Render Deployment]
 - **EmosiFloww Platform**: https://emosifloww.app
 - **ASI Alliance**: https://asi-alliance.ai  
 - **Agentverse**: https://agentverse.ai
 
 ---
-
-*Built with ❤️ for the ASI Alliance Hackathon - September 2025*

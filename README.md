@@ -4,6 +4,60 @@
 
 **EmosiFloww** is a revolutionary Next.js 15-based decentralized time-capsule platform that combines cutting-edge blockchain technology with beautiful UI/UX design. Users can create time-locked digital memories by uploading multimedia files with encrypted storage, scheduled decryption, and NFT tokenization - all powered by a sophisticated multi-chain infrastructure.
 
+
+## 🤝 Proudly Sponsored By
+
+We're grateful for the support and infrastructure provided by our technology partners:
+
+### 🦭 **Walrus Protocol**
+<div align="center">
+  <img src="https://walrus.space/assets/walrus-logo.svg" alt="Walrus Protocol" height="60"/>
+</div>
+
+- **Decentralized Storage Infrastructure**: Powering our multimedia storage layer
+- **High Availability**: 99.9% uptime with redundant node architecture
+- **Cost-Efficient**: Optimized storage costs for large file handling
+- **Integration**: Seamless blob storage and retrieval system
+- **Testnet Support**: Development environment access for testing and iteration
+
+**Learn more**: [walrus.space](https://walrus.space)
+
+---
+
+### ⚡ **Hedera Hashgraph**
+<div align="center">
+  <img src="https://hedera.com/logo.svg" alt="Hedera Hashgraph" height="60"/>
+</div>
+
+- **Smart Contract Execution**: Enterprise-grade time-locking mechanisms
+- **Scheduled Transactions**: Automated time-based capsule unlocking
+- **Low Fees**: Cost-effective smart contract deployment and execution
+- **Carbon Negative**: Sustainable blockchain infrastructure
+- **High Throughput**: 10,000+ TPS for scalable operations
+- **Consensus Service**: Immutable timestamping and ordering
+
+**Learn more**: [hedera.com](https://hedera.com)
+
+---
+
+### 🤖 **ASI Alliance**
+<div align="center">
+  <img src="https://asi.io/logo.svg" alt="ASI Alliance" height="60"/>
+</div>
+
+- **AI-Powered Features**: Intelligent memory agents for enhanced user experience
+- **Advanced Analytics**: AI-driven insights and memory categorization
+- **Natural Language Processing**: Smart content analysis and tagging
+- **Predictive Scheduling**: AI-optimized time capsule recommendations
+- **Automated Moderation**: Content safety and quality assurance
+- **Memory Appraisal**: AI-powered valuation of digital memories
+
+**Learn more**: [asi.io](https://asi.io)
+
+---
+
+## ✨ Key Features
+
 ## ✨ Key Features
 
 ### 🎯 Core Functionality

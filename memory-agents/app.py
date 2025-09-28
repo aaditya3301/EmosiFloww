@@ -1,32 +1,3 @@
-"""
-EmosiFloww ASI Alliance Agents for Agentverse via Render
-Background Worker deployment for 4 specialized AI agents
-"""
-from datetime import datetime
-from uuid import uuid4
-import os
-import asyncio
-import logging
-from dotenv import load_dotenv
-from openai import OpenAI
-
-from uagents import Context, Protocol, Agent
-from uagents.network import get_agent_address
-from uagents_core.contrib.protocols.chat import (
-    ChatAcknowledgement,
-    ChatMessage,
-    EndSessionContent,
-    TextContent,
-    chat_protocol_spec,
-)
-
-# Load environment variables
-load_dotenv()
-
-"""
-EmosiFloww ASI Alliance Agents - Multi-Agent Orchestrator
-Deploys 4 specialized agents to Agentverse via Render Background Worker
-"""
 from datetime import datetime
 from uuid import uuid4
 import os
@@ -58,10 +29,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class EmosiFlowwAgentOrchestrator:
-    """
-    Orchestrates all 4 EmosiFloww ASI Alliance agents for Render deployment
-    Uses Bureau to run multiple agents concurrently
-    """
     
     def __init__(self):
         self.bureau = Bureau()
@@ -69,11 +36,9 @@ class EmosiFlowwAgentOrchestrator:
         self.initialize_agents()
     
     def initialize_agents(self):
-        """Initialize all 4 specialized agents"""
         
         logger.info("🚀 Initializing EmosiFloww ASI Alliance Agents...")
         
-        # Initialize Marketplace Coordinator
         try:
             marketplace_agent = MarketplaceCoordinator(
                 name="EmosiFloww-Marketplace-Coordinator",
@@ -136,7 +101,6 @@ class EmosiFlowwAgentOrchestrator:
             logger.info(f"🔗 {agent_name}: {agent_obj.agent.address}")
     
     def run(self):
-        """Run all agents using Bureau"""
         logger.info("🔄 Starting EmosiFloww Agent Bureau...")
         logger.info("🏆 ASI Alliance Hackathon - Human-AI Interaction Excellence")
         logger.info("📍 All agents registered with mailbox=True for ASI:One discovery")
