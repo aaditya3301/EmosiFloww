@@ -41,14 +41,49 @@ export default function VortexDemoSecond() {
   const [createdBy, setCreatedBy] = useState('');
   const [detailedNotes, setDetailedNotes] = useState('');
 
+  // ETH Price state
+  const [ethPriceUSD, setEthPriceUSD] = useState<number | null>(null);
+  const [isPriceLoading, setIsPriceLoading] = useState(true);
+  const [priceError, setPriceError] = useState<string | null>(null);
+
   useEffect(() => {
-    // Simulate loading time
+    // Simulate loading time and fetch ETH price
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1800);
 
-    return () => clearTimeout(timer);
+    // Fetch ETH price from CoinGecko
+    fetchEthPrice();
+
+    // Set up interval to refresh price every 60 seconds
+    const priceInterval = setInterval(fetchEthPrice, 60000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(priceInterval);
+    };
   }, []);
+
+  const fetchEthPrice = async () => {
+    try {
+      setIsPriceLoading(true);
+      setPriceError(null);
+      
+      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch ETH price');
+      }
+      
+      const data = await response.json();
+      setEthPriceUSD(data.ethereum.usd);
+    } catch (error) {
+      console.error('Error fetching ETH price:', error);
+      setPriceError('Failed to fetch price');
+    } finally {
+      setIsPriceLoading(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -66,8 +101,8 @@ export default function VortexDemoSecond() {
     
     setUploadedFiles(prev => [...prev, ...newFiles]);
     
-    // Upload files to Walrus
-    await uploadFilesToWalrus(newFiles);
+    // Don't upload files to Walrus immediately - wait for user to click Deploy
+    // await uploadFilesToWalrus(newFiles);
   };
 
   const uploadFilesToWalrus = async (filesToUpload: UploadedFile[]) => {
@@ -427,18 +462,67 @@ export default function VortexDemoSecond() {
 
                 {/* ETH Amount */}
                 <div>
-                  <label className="block text-white text-sm font-medium mb-2">
-                    ETH Amount (optional)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.001"
-                    placeholder="0.0"
-                    value={ethAmount}
-                    onChange={(e) => setEthAmount(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-white/40 focus:outline-none"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Optional ETH to include with your capsule</p>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="block text-white text-sm font-medium">
+                      ETH Amount (optional)
+                    </label>
+                    {/* Live ETH Price Display */}
+                    <div className="flex items-center gap-2 text-xs">
+                      {isPriceLoading ? (
+                        <div className="flex items-center gap-1 text-gray-400">
+                          <div className="w-3 h-3">
+                            <LoaderFive text="..." />
+                          </div>
+                          <span>Loading price...</span>
+                        </div>
+                      ) : priceError ? (
+                        <span className="text-red-400">Price unavailable</span>
+                      ) : (
+                        <div className="flex items-center gap-1 text-green-400">
+                          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                          <span className="font-mono">${ethPriceUSD?.toLocaleString()}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="relative">
+                    <input
+                      type="number"
+                      step="0.001"
+                      placeholder="0.0"
+                      value={ethAmount}
+                      onChange={(e) => setEthAmount(e.target.value)}
+                      className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-white/40 focus:outline-none pr-24"
+                    />
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                      ETH
+                    </div>
+                  </div>
+                  
+                  {/* USD Equivalent */}
+                  {ethAmount && ethPriceUSD && !isNaN(parseFloat(ethAmount)) && (
+                    <div className="mt-2 p-2 bg-green-500/10 border border-green-500/30 rounded-lg">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-green-400">USD Equivalent:</span>
+                        <span className="text-white font-mono">
+                          ${(parseFloat(ethAmount) * ethPriceUSD).toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                          })}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <p className="text-xs text-gray-500 mt-1">
+                    Optional ETH to include with your capsule
+                    {ethPriceUSD && (
+                      <span className="ml-1 text-green-400">
+                        • Live price from CoinGecko
+                      </span>
+                    )}
+                  </p>
                 </div>
 
                 {/* Deploy Button */}
@@ -461,12 +545,17 @@ export default function VortexDemoSecond() {
                       return;
                     }
                     
-                    // Start upload process
-                    uploadFilesToWalrus(uploadedFiles.filter(f => f.status === 'pending'));
+                    // Start upload process for all pending files
+                    const pendingFiles = uploadedFiles.filter(f => f.status === 'pending');
+                    if (pendingFiles.length > 0) {
+                      uploadFilesToWalrus(pendingFiles);
+                    } else {
+                      alert('All files have already been processed');
+                    }
                   }}
-                  disabled={isUploading || uploadedFiles.length === 0 || !isConnected}
+                  disabled={isUploading || uploadedFiles.length === 0 || !isConnected || uploadedFiles.filter(f => f.status === 'pending').length === 0}
                   className={`w-full mt-4 px-6 py-3 font-medium rounded-lg transition-all ${
-                    isUploading || uploadedFiles.length === 0 || !isConnected
+                    isUploading || uploadedFiles.length === 0 || !isConnected || uploadedFiles.filter(f => f.status === 'pending').length === 0
                       ? 'bg-gray-600/20 border border-gray-600/30 text-gray-500 cursor-not-allowed'
                       : capsuleType === 'scheduled'
                       ? 'bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300'
@@ -479,7 +568,7 @@ export default function VortexDemoSecond() {
                       Creating {capsuleType === 'scheduled' ? 'Scheduled' : 'Immediate'} Capsules...
                     </span>
                   ) : (
-                    `Deploy ${capsuleType === 'scheduled' ? 'Time-Locked' : 'Immediate'} Capsule${uploadedFiles.length > 1 ? 's' : ''}`
+                    `Deploy ${capsuleType === 'scheduled' ? 'Time-Locked' : 'Immediate'} Capsule${uploadedFiles.filter(f => f.status === 'pending').length > 1 ? 's' : ''} (${uploadedFiles.filter(f => f.status === 'pending').length})`
                   )}
                 </button>
                 
@@ -516,10 +605,21 @@ export default function VortexDemoSecond() {
                   {/* ETH Value */}
                   {ethAmount && (
                     <div className="mb-2 p-2 bg-yellow-500/10 border border-yellow-500/30 rounded text-xs">
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center mb-1">
                         <span className="text-yellow-400 font-medium">ETH</span>
-                        <span className="text-white">{ethAmount} ETH</span>
+                        <span className="text-white font-mono">{ethAmount} ETH</span>
                       </div>
+                      {ethPriceUSD && !isNaN(parseFloat(ethAmount)) && (
+                        <div className="flex justify-between items-center text-gray-400">
+                          <span>USD Value:</span>
+                          <span className="font-mono">
+                            ${(parseFloat(ethAmount) * ethPriceUSD).toLocaleString(undefined, {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2
+                            })}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -544,7 +644,7 @@ export default function VortexDemoSecond() {
                                 <div className="w-3 h-3 border border-purple-400 border-t-transparent rounded-full animate-spin"></div>
                               )}
                               {fileObj.status === 'completed' && (
-                                <div className={fileObj.isScheduled ? "text-purple-400" : "text-green-400"}>✨</div>
+                                <div className={fileObj.isScheduled ? "text-purple-400" : "text-green-400"}> </div>
                               )}
                               {fileObj.status === 'error' && (
                                 <div className="text-red-400">✗</div>
@@ -556,35 +656,21 @@ export default function VortexDemoSecond() {
                             <span className="ml-2 shrink-0">{(fileObj.file.size / 1024).toFixed(1)}KB</span>
                           </div>
                           {fileObj.status === 'completed' && (
-                            <div className={`text-xs space-y-1 ${fileObj.isScheduled ? 'text-purple-400' : 'text-green-400'}`}>
-                              <div>🎯 Capsule ID: {fileObj.capsuleId}</div>
-                              <div>🔗 Blob: {fileObj.blobId?.substring(0, 20)}...</div>
-                              <div>🔐 Encrypted: {fileObj.encryptedBlobId?.substring(0, 20)}...</div>
-                              {fileObj.isScheduled && fileObj.hederaCapsuleId && (
-                                <>
-                                  <div>⏰ Hedera ID: {fileObj.hederaCapsuleId}</div>
-                                  <div>📅 Schedule: {fileObj.scheduleId?.substring(0, 20)}...</div>
-                                  <div>🔓 Unlocks: {fileObj.unlockTime ? new Date(fileObj.unlockTime * 1000).toLocaleDateString() : 'Unknown'}</div>
-                                </>
-                              )}
-                              <div>🎨 NFT Token: #{fileObj.nftTokenId} {fileObj.isScheduled ? <span className="text-purple-300">(SCHEDULED)</span> : <span className="text-yellow-400">(IMMEDIATE)</span>}</div>
-                              <div className="flex gap-2">
-                                {!fileObj.isScheduled && (
-                                  <a 
-                                    href={fileObj.fileUrl} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-blue-400 hover:text-blue-300 underline"
-                                  >
-                                    View File
-                                  </a>
-                                )}
-                                {fileObj.isScheduled && (
-                                  <span className="text-purple-400 text-xs">
-                                    🔒 Locked until unlock time
-                                  </span>
-                                )}
+                            <div className={`text-xs ${fileObj.isScheduled ? 'text-purple-400' : 'text-green-400'}`}>
+                              <div className="flex items-center justify-center gap-2 py-1">
+                                <span className="font-medium">NFT Minted</span>
+                                {fileObj.isScheduled ? 
+                                  <span className="text-purple-300 text-xs">(SCHEDULED)</span> : 
+                                  <span className="text-yellow-400 text-xs">(IMMEDIATE)</span>
+                                }
                               </div>
+                              {fileObj.isScheduled && (
+                                <div className="flex justify-center mt-1">
+                                  <span className="text-purple-400 text-xs">
+                                    Locked until unlock
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           )}
                           {fileObj.status === 'error' && fileObj.error && (
@@ -596,7 +682,7 @@ export default function VortexDemoSecond() {
                       ))}
                       {isUploading && (
                         <div className="text-yellow-400 text-xs text-center py-2">
-                          🚀 Creating time capsules (Walrus + NFT)...
+                          Creating time capsules...
                         </div>
                       )}
                     </div>
